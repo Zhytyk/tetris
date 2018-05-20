@@ -1,0 +1,16 @@
+<?import javafx.scene.canvas.Canvas?>
+<?import tetris.game.Constants?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.Scene?>
+<Scene onKeyReleased="#onKeyReleased" onKeyPressed="#onKeyPressed" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml" fx:controller="tetris.controllers.TetrisController" >
+    <AnchorPane>
+        <Canvas fx:id="tetrisCanvas" styleClass="canvas">
+            <width>
+                <Constants fx:constant="CANVAS_WIDTH" />
+            </width>
+            <height>
+                <Constants fx:constant="CANVAS_HEIGHT" />
+            </height>
+        </Canvas>
+    </AnchorPane>
+</Scene>
