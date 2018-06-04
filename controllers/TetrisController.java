@@ -19,32 +19,27 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Facade design pattern
+ */
 public class TetrisController {
     @FXML
     private Canvas tetrisCanvas;
 
     private ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
-    private GameContext context;
-
     private GameControlMove controlMove;
 
     private GameControlRotate controlRotate;
 
-    private GameField field;
-
-    private Drawer drawer;
-
     @FXML
     public void initialize() {
-        drawer = new DrawerImpl(tetrisCanvas.getGraphicsContext2D());
+        DrawerImpl.init(tetrisCanvas.getGraphicsContext2D());
 
-        field = new TetrisField();
-        controlMove = new TetrisControlMove(drawer, field);
-        controlRotate = new TetrisControlRotate(drawer, field);
-        context = new TetrisContext(drawer, controlMove, controlRotate, field);
+        controlMove = TetrisControlMove.getInstance();
+        controlRotate = TetrisControlRotate.getInstance();
 
-        scheduledExecutorService.scheduleAtFixedRate((Runnable) context, 0, 100, TimeUnit.MILLISECONDS);
+        scheduledExecutorService.scheduleAtFixedRate((Runnable) TetrisContext.getInstance(), 0, 100, TimeUnit.MILLISECONDS);
         scheduledExecutorService.scheduleAtFixedRate((Runnable) controlMove, 0, 70, TimeUnit.MILLISECONDS);
     }
 

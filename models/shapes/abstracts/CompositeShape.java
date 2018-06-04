@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Composite design pattern
+ */
 public abstract class CompositeShape extends Shape {
     protected Cell[] cells;
 

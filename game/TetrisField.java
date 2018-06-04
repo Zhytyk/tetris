@@ -6,6 +6,12 @@ import tetris.models.shapes.abstracts.Shape;
 public class TetrisField implements GameField {
     private boolean[][] cells;
 
+    private static GameField instance = new TetrisField();
+
+    public static GameField getInstance() {
+        return instance;
+    }
+
     public TetrisField() {
         cells = new boolean[Constants.rowLength()][Constants.cellLength()];
     }

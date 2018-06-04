@@ -16,6 +16,13 @@ public enum Shapes {
         this.cls = cls;
     }
 
+
+    /**
+     * Prototype design pattern
+     * @param <T>
+     * @return
+     * @throws TetrisException
+     */
     public <T extends Shape> T newInstance() throws TetrisException {
         try {
             return (T) cls.getConstructor().newInstance();

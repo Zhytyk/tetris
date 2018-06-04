@@ -6,10 +6,24 @@ import tetris.game.Constants;
 import tetris.models.shapes.abstracts.Shape;
 import tetris.utils.interfaces.Drawer;
 
+import java.util.Objects;
+
 public class DrawerImpl implements Drawer {
     private GraphicsContext graphicsContext;
 
-    public DrawerImpl(GraphicsContext graphicsContext) {
+    private static Drawer instance;
+
+    public static void init(GraphicsContext ctx) {
+        if (Objects.isNull(instance)) {
+            instance = new DrawerImpl(ctx);
+        }
+    }
+
+    public static Drawer getInstance() {
+        return instance;
+    }
+
+    private DrawerImpl(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
     }
 

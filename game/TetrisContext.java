@@ -7,6 +7,7 @@ import tetris.game.interfaces.GameField;
 import tetris.models.errors.ExceptionHandler;
 import tetris.models.errors.TetrisException;
 import tetris.models.shapes.abstracts.Shape;
+import tetris.utils.DrawerImpl;
 import tetris.utils.interfaces.Drawer;
 
 import java.util.Objects;
@@ -21,11 +22,24 @@ public class TetrisContext implements GameContext, Runnable  {
     private GameField field;
     private Drawer drawer;
 
-    public TetrisContext(Drawer drawer, GameControlMove controlMove, GameControlRotate controlRotate, GameField field) {
-        this.drawer = drawer;
-        this.controlMove = controlMove;
-        this.controlRotate = controlRotate;
-        this.field = field;
+    private static GameContext instance;
+
+    /**
+     * Signleton design pattern
+     */
+    public static GameContext getInstance() {
+        if (Objects.isNull(instance)) {
+            instance = new TetrisContext();
+        }
+
+        return instance;
+    }
+
+    private TetrisContext() {
+        this.drawer = DrawerImpl.getInstance();
+        this.controlMove = TetrisControlMove.getInstance();
+        this.controlRotate = TetrisControlRotate.getInstance();
+        this.field = TetrisField.getInstance();
     }
 
     @Override

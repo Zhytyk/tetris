@@ -3,6 +3,7 @@ package tetris.game;
 import tetris.game.interfaces.GameControlRotate;
 import tetris.game.interfaces.GameField;
 import tetris.models.shapes.abstracts.Shape;
+import tetris.utils.DrawerImpl;
 import tetris.utils.interfaces.Drawer;
 
 import java.util.Objects;
@@ -14,9 +15,19 @@ public class TetrisControlRotate implements GameControlRotate {
 
     private Shape fallingShape;
 
-    public TetrisControlRotate(Drawer drawer, GameField field) {
-        this.drawer = drawer;
-        this.field = field;
+    private static GameControlRotate instance;
+
+    public static GameControlRotate getInstance() {
+        if (Objects.isNull(instance)) {
+            instance = new TetrisControlRotate();
+        }
+
+        return instance;
+    }
+
+    private TetrisControlRotate() {
+        this.drawer = DrawerImpl.getInstance();
+        this.field = TetrisField.getInstance();
     }
 
     @Override
